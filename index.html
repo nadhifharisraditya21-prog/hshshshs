@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TOP UP VIA CYBER-AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: #0a0a0a;
+      font-family: 'Courier New', monospace;
+      color: #0f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-image: radial-gradient(rgba(0,255,0,0.08) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .container {
+      max-width: 450px;
+      width: 100%;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid #0f0;
+      box-shadow: 0 0 25px rgba(0,255,0,0.4), inset 0 0 10px rgba(0,255,0,0.1);
+      border-radius: 12px;
+      padding: 25px 20px;
+      backdrop-filter: blur(5px);
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.8rem;
+      text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+      letter-spacing: 3px;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .sub {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #0a0;
+      margin-bottom: 25px;
+      border-bottom: 1px dashed #0f0;
+      padding-bottom: 12px;
+    }
+    .input-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+      color: #0c0;
+      text-transform: uppercase;
+    }
+    select, input {
+      width: 100%;
+      padding: 12px 15px;
+      background: #111;
+      border: 1px solid #0f0;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      border-radius: 6px;
+      outline: none;
+      transition: 0.2s;
+    }
+    select:focus, input:focus {
+      border-color: #fff;
+      box-shadow: 0 0 12px #0f0;
+    }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: transparent;
+      border: 2px solid #0f0;
+      color: #0f0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.2s;
+      margin-top: 10px;
+    }
+    .btn:hover {
+      background: #0f0;
+      color: #000;
+      box-shadow: 0 0 30px #0f0;
+    }
+    .btn:active {
+      transform: scale(0.97);
+    }
+    .result {
+      margin-top: 20px;
+      padding: 12px;
+      border: 1px solid #0f0;
+      background: #000;
+      text-align: center;
+      font-size: 0.9rem;
+      display: none;
+      border-radius: 6px;
+    }
+    .result.show {
+      display: block;
+      animation: blink 0.2s;
+    }
+    @keyframes blink {
+      0% {opacity: 0.5;}
+      100% {opacity: 1;}
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.65rem;
+      color: #050;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>⚡TOPUP⚡</h1>
+  <div class="sub">CYBER-AI GATEWAY // 2046</div>
+
+  <div class="input-group">
+    <label>🎮 Game</label>
+    <select id="game">
+      <option value="ml">Mobile Legends</option>
+      <option value="ff">Free Fire</option>
+      <option value="pubg">PUBG Mobile</option>
+      <option value="valo">Valorant Points</option>
+      <option value="genshin">Genshin Impact</option>
+      <option value="codm">Call of Duty Mobile</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>🆔 ID / Player Tag</label>
+    <input type="text" id="playerId" placeholder="Masukkan ID game..." autocomplete="off">
+  </div>
+
+  <div class="input-group">
+    <label>💰 Nominal</label>
+    <select id="nominal">
+      <option value="5000">5.000</option>
+      <option value="10000">10.000</option>
+      <option value="20000">20.000</option>
+      <option value="50000">50.000</option>
+      <option value="100000">100.000</option>
+      <option value="200000">200.000</option>
+    </select>
+  </div>
+
+  <div class="input-group">
+    <label>💳 Metode Pembayaran</label>
+    <select id="payment">
+      <option value="qris">QRIS (Auto)</option>
+      <option value="gopay">GoPay</option>
+      <option value="dana">DANA</option>
+      <option value="ovo">OVO</option>
+      <option value="bank">Transfer Bank</option>
+    </select>
+  </div>
+
+  <button class="btn" id="submitBtn">PROSES SEKARANG</button>
+
+  <div id="resultBox" class="result"></div>
+  <div class="footer">[ ENCRYPTED CHANNEL // YUKI NETWORK ]</div>
+</div>
+
+<script>
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    const game = document.getElementById('game').value;
+    const playerId = document.getElementById('playerId').value.trim();
+    const nominal = document.getElementById('nominal').value;
+    const payment = document.getElementById('payment').value;
+    const resultBox = document.getElementById('resultBox');
+
+    if (playerId === '') {
+      resultBox.innerHTML = '❌ ISI ID DULU, BEGO!';
+      resultBox.className = 'result show';
+      return;
+    }
+
+    // Simulasi proses (real system tinggal konek API)
+    const gameNames = {
+      ml: 'Mobile Legends',
+      ff: 'Free Fire',
+      pubg: 'PUBG Mobile',
+      valo: 'Valorant',
+      genshin: 'Genshin Impact',
+      codm: 'Call of Duty Mobile'
+    };
+    const paymentNames = {
+      qris: 'QRIS',
+      gopay: 'GoPay',
+      dana: 'DANA',
+      ovo: 'OVO',
+      bank: 'Transfer Bank'
+    };
+
+    resultBox.innerHTML = `
+      ✅ TRANSAKSI SUKSES<br>
+      ══════════════════<br>
+      🎮 Game : ${gameNames[game]}<br>
+      🆔 ID   : ${playerId}<br>
+      💰 Nom  : Rp ${parseInt(nominal).toLocaleString('id-ID')}<br>
+      💳 Bayar: ${paymentNames[payment]}<br>
+      ══════════════════<br>
+      ⌛ Status: <span style="color:#fff;">DIKIRIM OTOMATIS</span><br>
+      🔐 TX: 7xVg${Math.random().toString(36).substr(2, 8).toUpperCase()}CYBER
+    `;
+    resultBox.className = 'result show';
+  });
+</script>
+</body>
+</html>
